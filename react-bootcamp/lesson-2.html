@@ -38,7 +38,8 @@
       handleAddFriend(name) {
         this.setState((currentState) => {
           return {
-            friends: [...currentState.friends, name]
+            friends: [...currentState.friends, name],
+            input: ''
           }
         })
       }
@@ -52,12 +53,8 @@
       }
 
       updateInput(e) {
-        const value = e.target.value
-
-        this.setState((currentState) => {
-          return {
-            input: value
-          }
+        this.setState({
+          input: e.target.value
         })
       }
 
@@ -69,7 +66,7 @@
               placeholder='New friend'
               value={this.state.input}
               onChange={this.updateInput}/>
-            <button onClick={() => { this.handleAddFriend(this.state.input) }}>Submit</button>
+            <button onClick={() => { this.state.input === '' ? null : this.handleAddFriend(this.state.input) }}>Submit</button>
             <FriendsList list={this.state.friends} onRemoveFriend={this.handleRemoveFriend} />
           </div>
         )
